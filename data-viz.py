@@ -4,7 +4,7 @@ import seaborn as sns
 import numpy as np
 from sklearn import preprocessing
 from datetime import datetime
-
+import xgboost as xg
 np.random.seed(5)
 def normalization(data_df, y_col):
     min_val = data_df[y_col].min()
@@ -18,16 +18,14 @@ def normalization(data_df, y_col):
 samples_15_from_30 = pd.read_csv('C:\\Users\\rubbi\\PycharmProjects\\pimlBuildings\\B90_102\\experiment_30m\\HVAC_B90_102_exp_30m_20210426_15mins.csv',
                                  parse_dates=['time'])
 
-
+#predictors - ahu_supply_temp_smooth, setpoint, room_temp_prev
+room_temp_smooth_shifted = 0;
 subset_samples = samples_15_from_30[['room_temp_smooth',
                                      'htg_valve_position',
                                      'airflow_current_smooth',
-                                     'supply_discharge_temp_smooth',
-                                     'thermostat_outside_temp_smooth',
+                                     'ahu_supply_temp_smooth',
                                      'setpoint',
-                                     'htg_sp_current',
-                                     'airflow_desired',
-                                     'occupied_status']]
+                                      'room_temp']]
 
 # = len(subset_samples['time'])
 #for i in range(1, numRow):
